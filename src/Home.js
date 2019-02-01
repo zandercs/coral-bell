@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Image, Carousel } from 'react-bootstrap';
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
 
 class Home extends Component {
   constructor(props){
@@ -36,7 +39,7 @@ class Home extends Component {
           <Row>
             <Carousel pauseOnHover={false} interval={4300} fade={true} controls={false}>
               {this.state.photos.map((photo, index)=>{
-                return <Carousel.Item key={index}><Image src={"/"+photo} fluid /></Carousel.Item>
+                return <Carousel.Item key={index}><Image src={process.env.PUBLIC_URL+"/"+photo} fluid /></Carousel.Item>
               })}
             </Carousel>
           </Row>
