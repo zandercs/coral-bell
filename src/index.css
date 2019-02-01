@@ -1,1 +1,7 @@
+/*circle indicators for carousel*/
+.carousel-indicators li{
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+}
 footer{text-align: center;}

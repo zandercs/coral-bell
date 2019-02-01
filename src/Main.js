@@ -12,7 +12,7 @@ import "./index.css";
 class Main extends Component {
   render(){
     return(
-      <Router>
+      <Router basename="/test">
         <div>
           <CustomNavBar />
           <Route exact path="/" component={Home}/>
@@ -21,7 +21,7 @@ class Main extends Component {
           <Route path="/commercial" render={(props) => <Category selection="Commercial" />}/>
           <Route path="/engagement-wedding" render={(props) => <Category selection="Engagements &amp; Weddings" />}/>
           <Route path="/family" render={(props) => <Category selection="Family" />}/>
-          
+
           <Route path="/contact" component={Contact}/>
           <footer>&copy; 2016</footer>
         </div>

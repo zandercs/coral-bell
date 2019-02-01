@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Jumbotron, Image, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Image, Carousel } from 'react-bootstrap';
 
 class Home extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      photos: []
+    };
+  }
+
+  componentDidMount() {
+    let dir = 'http://aschindler.space/test/getImages.php?dir=images/carousel/';
+    fetch(dir)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          //console.log('result-items: '+JSON.stringify(result));
+          this.setState({photos: result});
+        },
+        (error) => {
+          console.log('result-items:'+error)
+        }
+      )
+  }
+
   render(){
+    //console.log("state: "+this.state.photos);
     const carouselStyle = {
       paddingBottom:30
     };
@@ -11,10 +35,9 @@ class Home extends Component {
         <Container style={carouselStyle} fluid>
           <Row>
             <Carousel pauseOnHover={false} interval={4300} fade={true} controls={false}>
-              <Carousel.Item><Image src={require("./images/carousel/IMG_9097.jpg")} fluid /></Carousel.Item>
-              <Carousel.Item><Image src={require("./images/carousel/IMG_9219.jpg")} fluid /></Carousel.Item>
-              <Carousel.Item><Image src={require("./images/carousel/IMG_9280.jpg")} fluid /></Carousel.Item>
-              <Carousel.Item><Image src={require("./images/carousel/IMG_9291.jpg")} fluid /></Carousel.Item>
+              {this.state.photos.map((photo, index)=>{
+                return <Carousel.Item key={index}><Image src={"/"+photo} fluid /></Carousel.Item>
+              })}
             </Carousel>
           </Row>
         </Container>
